@@ -1,0 +1,50 @@
+{
+    "type": "FeatureCollection",
+    "metadata": {
+        "url": "",
+        "title": "Islamic Strores",
+        "count": 2
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Ali Shahbaz's Store",
+                "place": "2515 West Winston Rd.",
+                "city": "Anaheim",
+                "state": "CA",
+                "zip": "92804",
+                "url": "http://alishahbaz.me",
+                "category": "Software",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        -155.278,
+                        19.3833,
+                        1.8
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Muddassir's Store",
+                "place": "1316 West Romneya Dr.",
+                "City": "Anaheim",
+                "State": "CA",
+                "Zip": "92801",
+                "url": "http://mudmayet.herokuapp.com/",
+                "category": "Design",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        -150.278,
+                        19.3833,
+                        1.8
+                    ]
+                }
+            }
+        }
+    ]
+}
