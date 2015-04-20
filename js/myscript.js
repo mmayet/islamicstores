@@ -1,6 +1,11 @@
 $(document).ready(function() {
   myReadyFunction();
   startMap();
+
+  if (!$('#Software').is(':checked')) {
+    $("#Software").css("display","none");
+  }
+
 });
 
 function startMap() {
@@ -87,16 +92,24 @@ function addButtons(lat, lng, category) {
 
 function addFilterCheckBox(type) {
     var id_filter = escapeText(type);
-    console.log(id_filter);
-    $(".filter_boxes").append("<div class='checkbox'><label><input type='checkbox' id="+id_filter+"_filter onClick='filterOnClick("+id_filter+")' value='option1'>" + id_filter + "<label></div>");
+    $(".filter_boxes").append("<div class='checkbox'><label><input type='checkbox' id="+id_filter
+        +" onClick='filterOnClick("+document.getElementById(type)+","+document.getElementsByClassName(type)+")' value='option1' checked>" + id_filter + "<label></div>");
 }
 
-function filterOnClick(id_filter) {
-    $("#Software").on('click', function() {
-        $(".store").css("display", "none");
-        $(".Software").css("display", "block");
-    })
+function filterOnClick(id_selector, class_selector) {
+    //var id_selector = document.getElementById(id_filter);
+    //var class_selector = document.getElementsByClassName(id_filter);
+    console.log(id_selector);
+    console.log(class_selector);
+    if (!$("id_selector").is(':checked')) {
+        $("class_selector").css("display","none");
+    }
+    else {
+        $("class_selector").css("display","block");   
+    }
 }
+
+
 
 function centerMap(lat, lng) {
     NProgress.start();
