@@ -1,85 +1,105 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Muslim Yelp</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom CSS for the '3 Col Portfolio' Template -->
-    <link href="css/portfolio-item.css" rel="stylesheet">
-
-    <!-- NProgress CSS -->
-    <link rel='stylesheet' href='css/nprogress.css' />
-
-</head>
-
-<body>
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-12 text">
-                <h1 class="page-header">Islamic Stores
-                    <small>Muslim Yelp</small>
-                </h1>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-8 contact-map" id="map_canvas" metaname="viewport" content="width=device-width, initial-scale=1.0"></div>
-            <div class="col-md-4 text">
-                <h3>Search</h3>
-                <input type="search" class="form-control" id="search" placeholder="e.g. Anaheim or 92808 or Tax">
-                <h4>Filters</h4>
-                <div class="allboxes">
-                    <div class="checkbox">
-                      <label><input type="checkbox" value="masjids">Masjids</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="food">Halal Food</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="tech">Tech Stores</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="tax">Tax Stores</label>
-                    </div>
-                </div>
-                <h3>Poppin' Shops</h3>
-                <table></table>
-          </div>
-        </div>
-
-    </div>
-    <!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-        <footer>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Muslim Yelp</title>
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <!-- Custom CSS for the '3 Col Portfolio' Template -->
+        <link href="css/portfolio-item.css" rel="stylesheet">
+        <!-- NProgress CSS -->
+        <link rel='stylesheet' href='css/nprogress.css' />
+    </head>
+    <body>
+        <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <p>Designed|Maintained by <a href="http://mudmayet.herokuapp.com/">Muddassir Mayet</a></p>
+                <div class="col-lg-12 text">
+                    <h1 class="page-header">Islamic Stores
+                        <small>Muslim Yelp</small>
+                    </h1>
                 </div>
             </div>
-        </footer>
-
-    </div>
-    <!-- /.container -->
-
-    <!-- JavaScript -->
-    <script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyDaotS0Jkng0_Tlx57I_qBaQwpbtCFFeDA&callback=initMap" type="text/javascript"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="js/myscript.js"></script>
-    <script src='js/nprogress.js'></script>
-
-</body>
-
+            <div class="row">
+                <div class="col-md-8 contact-map" id="map_canvas" metaname="viewport" content="width=device-width, initial-scale=1.0"></div>
+                <div class="col-md-4 text">
+                    <div class="search-box">
+                        <label class="sr-only" for="searchbox">Search</label>
+                        <input type="text" class="form-control" id="searchbox" placeholder="Search &hellip;">
+                        <!--<span class="glyphicon glyphicon-search search-icon"></span>-->
+                    </div>
+                    <div class="allboxes well">
+                        <fieldset id="genre_criteria">
+                            <legend>Filters</legend>
+                            <div class="checkbox">
+                                <label>
+                                <input type="checkbox" value="All" id="all_genre">
+                                <span>All</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                <input type="checkbox" value="Food">
+                                <span> Food </span> 
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                <input type="checkbox" value="Religious">
+                                <span> Religious </span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                <input type="checkbox" value="Financial">
+                                <span> Financial </span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                <input type="checkbox" value="Technology">
+                                <span> Technology </span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                <input type="checkbox" value="Medical">
+                                <span> Medical </span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                <input type="checkbox" value="Educational">
+                                <span> Educational </span>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <h3>Poppin' Shops</h3>
+                    <table></table>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- /.container -->
+        <div class="container">
+            <hr>
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Designed|Maintained by <a href="http://mudmayet.herokuapp.com/">Muddassir Mayet</a></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- /.container -->
+        <!-- JavaScript -->
+        <script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyDaotS0Jkng0_Tlx57I_qBaQwpbtCFFeDA&callback=initMap" type="text/javascript"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="js/myscript.js"></script>
+        <script src="js/filter.js"></script>
+        <script src='js/nprogress.js'></script>
+    </body>
 </html>
