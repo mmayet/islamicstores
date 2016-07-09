@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Islamic Stores</title>
+    <title>Muslim Yelp</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -21,27 +21,39 @@
 </head>
 
 <body>
-
     <div class="container">
 
         <div class="row">
             <div class="col-lg-12 text">
                 <h1 class="page-header">Islamic Stores
-                    <small>Near You</small>
+                    <small>Muslim Yelp</small>
                 </h1>
             </div>
         </div>
 
         <div class="row">
+            <div class="col-md-8 contact-map" id="map_canvas" metaname="viewport" content="width=device-width, initial-scale=1.0"></div>
             <div class="col-md-4 text">
                 <h3>Search</h3>
                 <input type="search" class="form-control" id="search" placeholder="e.g. Anaheim or 92808 or Tax">
                 <h4>Filters</h4>
-                <div class="filter_boxes"></div>
-                <h3>Stores</h3>
+                <div class="allboxes">
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="masjids">Masjids</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="food">Halal Food</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="tech">Tech Stores</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="tax">Tax Stores</label>
+                    </div>
+                </div>
+                <h3>Poppin' Shops</h3>
                 <table></table>
-            </div>
-            <div class="col-md-8 contact-map" id="map_canvas" metaname="viewport" content="width=device-width, initial-scale=1.0"></div>
+          </div>
         </div>
 
     </div>
@@ -63,8 +75,8 @@
     <!-- /.container -->
 
     <!-- JavaScript -->
-    <script src="//maps.googleapis.com/maps/api/js?sensor=false&language=en&region=US"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyDaotS0Jkng0_Tlx57I_qBaQwpbtCFFeDA&callback=initMap" type="text/javascript"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="js/myscript.js"></script>
     <script src='js/nprogress.js'></script>
 

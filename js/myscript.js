@@ -1,26 +1,20 @@
 $(document).ready(function() {
-  myReadyFunction();
-  startMap();
-
-  if (!$('#Software').is(':checked')) {
-    $("#Software").css("display","none");
-  }
-
+    myReadyFunction();
+    //startMap();
 });
 
-function startMap() {
+function initMap() {
     map = new google.maps.Map(document.getElementById("map_canvas"), {
-        zoom: 6,
+        zoom: 11,
     });
     var latLng;
-    var storeName;
+    var shopName;
 }
 
 
 function initializeMap(position) {
     NProgress.set(0.4);
     var userCenter = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    //map.setCenter(userCenter);
     centerMap(position.coords.latitude, position.coords.longitude);
 
     var image = {
@@ -38,78 +32,24 @@ function initializeMap(position) {
     });
 }
 
-function escapeText(t){
-  return document.createTextNode(t).textContent;
+function escapeText(t) {
+    return document.createTextNode(t).textContent;
 }
 
-function quakeReader(results) {
-    var time = new Date(new Date().getTime());
-    if (results.metadata.count == 0) {
-        $(".lastUpdated").append("<br/> No recent stores logged by USGS.");
-        NProgress.done();
-    }
-    else {
-        for (var i = 0; i <= results.metadata.count; i++) {
-            var store = results.features[i].properties;
-            storeName = escapeText(store.name);
-            storeSite = escapeText(store.url);
-            
-            var coords = store.geometry.coordinates;
-            if (i == 0) {
-                if (navigator.geolocation) {
-                    centerMap(coords[1], coords[0]);
-                    navigator.geolocation.getCurrentPosition(initializeMap);
-                } else {
-                    centerMap(coords[1], coords[0]);
-                }
-            }
-            $("table").append("<tr class='store "+store.category+"'><td><a href='" + storeSite + "' target='_blank'>" + storeName + "</a></td></tr>");
-            latLng = new google.maps.LatLng(coords[1], coords[0]);
-            var marker = new google.maps.Marker({
-                position: latLng,
-                map: map,
-                title: storeName
-            });
-            addButtons(coords[1], coords[0], store.category);
-            addFilterCheckBox(store.category);
-
-            google.maps.event.addListener(marker, 'click', function () {
-                NProgress.start();
-                map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-                map.setZoom(20);
-                map.setTilt(45);
-                map.panTo(this.getPosition());
-                NProgress.done();
-            });
-        }
+function shopReader(results) {
+    for (var i = 0; i <= results.metadata.count; i++) {
+        shopName = escapeText(results.features[i].properties.title);
+        shopLink = escapeText(results.features[i].properties.url);
+        var shop = results.features[i];
+        myGetCoordsFunction(i, shopName, shopLink, escapeText(results.features[i].properties.address));
     }
 }
 
-function addButtons(lat, lng, category) {
-    $("table").append("<tr class='store "+category+"'><td><button onclick=\"centerMap(" + lat + "," + lng
-        + ");\">Center Here</button></td></tr>");
+function addButtons(lat, lng) {
+    $("table").append("<tr><td><button onclick=\"centerMap(" + lat + "," + lng +
+        ");\">View this store</button>" +
+        "<button>Drive Here</button></td></tr>");
 }
-
-function addFilterCheckBox(type) {
-    var id_filter = escapeText(type);
-    $(".filter_boxes").append("<div class='checkbox'><label><input type='checkbox' id="+id_filter
-        +" onClick='filterOnClick("+document.getElementById(type)+","+document.getElementsByClassName(type)+")' value='option1' checked>" + id_filter + "<label></div>");
-}
-
-function filterOnClick(id_selector, class_selector) {
-    //var id_selector = document.getElementById(id_filter);
-    //var class_selector = document.getElementsByClassName(id_filter);
-    console.log(id_selector);
-    console.log(class_selector);
-    if (!$("id_selector").is(':checked')) {
-        $("class_selector").css("display","none");
-    }
-    else {
-        $("class_selector").css("display","block");   
-    }
-}
-
-
 
 function centerMap(lat, lng) {
     NProgress.start();
@@ -118,16 +58,89 @@ function centerMap(lat, lng) {
     NProgress.done();
 }
 
-function myBadLoadFunction(XMLHttpRequest,errorMessage,errorThrown) {
-  alert("Load failed:"+errorMessage+":"+errorThrown);
+function myBadLoadFunction(XMLHttpRequest, errorMessage, errorThrown) {
+    alert("Load failed:" + errorMessage + ":" + errorThrown);
 }
-      
-function myReadyFunction(){
-  $.ajax({
-    //url: "/myProxy.php?http://store.usgs.gov/stores/feed/v1.0/summary/all_hour.geojson",
-    url: "js/storeData.json",
-    dataType: "json",
-    success: quakeReader,
-    error: myBadLoadFunction
-  });
+
+function myReadyFunction() {
+    $.ajax({
+        url: "js/stores.json",
+        dataType: "json",
+        success: shopReader,
+        error: myBadLoadFunction
+    });
 }
+
+function myGetCoordsFunction(i, shName, shLink, address) {
+    $.ajax({
+        //url: "//maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + apiKey,
+        url: "//maps.googleapis.com/maps/api/geocode/json?address=" + address,
+        dataType: "json",
+        success: function(data) {
+            geodata = data.results[0];
+
+            var lat = geodata.geometry.location.lat;
+            var lng = geodata.geometry.location.lng;
+            if (i == 0) {
+                if (navigator.geolocation) {
+                    centerMap(lat, lng);
+                    navigator.geolocation.getCurrentPosition(initializeMap);
+                } else {
+                    centerMap(lat, lng);
+                }
+            }
+            $("table").append("<tr><td><a href='" + shLink + "' target='_blank'>" + shName + "</a></td></tr><tr><td>" +
+                "</td></tr>");
+            latLng = new google.maps.LatLng(lat, lng);
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: map,
+                title: shName
+            });
+            addButtons(lat, lng);
+
+            google.maps.event.addListener(marker, 'click', function() {
+                NProgress.start();
+                map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+                map.setZoom(20);
+                map.setTilt(45);
+                map.panTo(this.getPosition());
+                NProgress.done();
+            });
+        },
+        error: myBadLoadFunction
+    });
+}
+
+/*function getGeoData(data) {
+    geodata = data.results[0];
+
+    var lat = geodata.geometry.location.lat;
+    var lng = geodata.geometry.location.lng;
+    //if (i == 0) {
+        if (navigator.geolocation) {
+            centerMap(lat, lng);
+            navigator.geolocation.getCurrentPosition(initializeMap);
+        } else {
+            centerMap(lat, lng);
+        }
+    //}
+    $("table").append("<tr><td><a href='" + shopLink + "' target='_blank'>" + shopName + "</a></td></tr><tr><td>"
+            + "</td></tr>");
+    latLng = new google.maps.LatLng(lat, lng);
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        title: shopName
+    });
+    addButtons(lat, lng);
+
+    google.maps.event.addListener(marker, 'click', function () {
+        NProgress.start();
+        map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+        map.setZoom(20);
+        map.setTilt(45);
+        map.panTo(this.getPosition());
+        NProgress.done();
+    });
+}*/

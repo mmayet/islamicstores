@@ -1,0 +1,51 @@
+{  
+    "type":"FeatureCollection",
+    "metadata":{  
+        "count":5
+    },
+    "features":[  
+        {  
+            "type":"Feature",
+            "properties":{  
+                "url":"sangiovannipizza.com",
+                "title":"San Giovanni's Pizza",
+                "address":"1001 N Euclid St, Anaheim, CA 92801"
+            },
+            "tags":{
+
+            }
+        },
+        {  
+            "type":"Feature",
+            "properties":{
+                "url":"hatamrestaurant.net",
+                "title":"Hatam Restaurant",
+                "address":"1112 N Brookhurst St #6, Anaheim, CA 92801"
+            }
+        },
+        {  
+            "type":"Feature",
+            "properties":{  
+                "url":"vmcmasjid.com",
+                "title":"VMC Masjid",
+                "address":"515H W Valencia Dr, Fullerton, CA 92832"
+            }
+        },
+        {  
+            "type":"Feature",
+            "properties":{  
+                "url":"masislamic.com",
+                "title":"Mas' Chinese Islamic Restaurant",
+                "address":"601 E Orangethorpe Ave, Anaheim, CA 92801"
+            }
+        },
+        {  
+            "type":"Feature",
+            "properties":{  
+                "url":"alamirbakery.com",
+                "title":"Al Amir Bakery",
+                "address":"905 S Brookhurst St, Anaheim, CA 92804"
+            }
+        }
+    ]
+}
